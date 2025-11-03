@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Interactivo | Facundo Mendez</title>
+    <!-- Chosen Palette: Calm Neutral (White/Gray) con Acentos Azules -->
+    <!-- Application Structure Plan: SPA con pestañas (Inicio, Habilidades, Experiencia/Proyectos, Educación). 'Inicio' presenta métricas clave (KPIs) del CV. 'Habilidades' usa botones interactivos para filtrar categorías. 'Experiencia/Proyectos' usa sub-pestañas para separar roles y portafolio. Esta estructura, diferente al CV lineal, guía al usuario a los datos clave (métricas, habilidades, proyectos) de forma más efectiva. -->
+    <!-- Visualization & Content Choices: [Métricas % -> Goal: Informar -> Viz: Chart.js Bar Chart ('Impacto Cuantificado') -> Interaction: Hover (tooltip) -> Justification: Visualiza los logros clave en % (40% manual, 60% confiabilidad) del CV. | Habilidades -> Goal: Organizar -> Viz: HTML/CSS + JS Toggles -> Interaction: Click botones (Cloud, Scripting) -> Justification: Permite explorar categorías sin sobrecargar y evita calificaciones subjetivas. | Experiencia/Proyectos -> Goal: Organizar -> Viz: JS Tabs Internas -> Interaction: Click tabs -> Justification: Separa y organiza contenido relacionado.] -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        [data-tab-content], [data-inner-tab-content] {
+            display: none;
+        }
+        [data-tab-content].active, [data-inner-tab-content].active {
+            display: block;
+        }
+        .tab-button.active {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .tab-button {
+            border-bottom-width: 3px;
+            border-color: transparent;
+        }
+        .skill-button.active {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <main class="max-w-5xl mx-auto my-10 p-6 md:p-10 bg-white rounded-2xl shadow-lg border border-gray-200">
+
+        <!-- Encabezado -->
+        <header class="text-center md:text-left pb-6 border-b border-gray-200">
+            <h1 class="text-4xl font-bold text-gray-900">Facundo Mendez</h1>
+            <h2 class="text-2xl font-semibold text-blue-600 mt-1">DevOps Engineer Junior | Automatización & Cloud</h2>
+        </header>
+
+        <!-- Navegación Principal de Pestañas -->
+        <nav class="flex flex-wrap justify-center md:justify-start space-x-4 md:space-x-6 mt-6 border-b border-gray-200">
+            <button data-tab-target="#inicio" class="tab-button active py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Inicio & Métricas</button>
+            <button data-tab-target="#habilidades" class="tab-button py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Habilidades</button>
+            <button data-tab-target="#experiencia" class="tab-button py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Experiencia & Proyectos</button>
+            <button data-tab-target="#educacion" class="tab-button py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Educación</button>
+        </nav>
+
+        <!-- Contenedor del Contenido de las Pestañas -->
+        <div class="mt-8">
+
+            <!-- Pestaña 1: Inicio & Métricas -->
+            <section id="inicio" data-tab-content class="active">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Resumen Profesional</h3>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    DevOps Junior con experiencia en automatización, Docker y AWS EC2. Transición desde automatización industrial (PLC/SCADA) aplicando habilidades en entornos IT. Certificado en DevOps y SRE por The Linux Foundation.
+                </p>
+
+                <h3 class="text-2xl font-semibold text-gray-900 mt-10 mb-5">Impacto Cuantificado</h3>
+                <p class="text-gray-700 mb-6 max-w-3xl">Estas son las métricas clave de mis proyectos y experiencia, demostrando un enfoque en la eficiencia y la confiabilidad.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-lg text-center shadow-sm">
+                        <div class="text-4xl font-bold text-blue-600">40%</div>
+                        <div class="mt-2 text-sm font-medium text-gray-700">Reducción de Operaciones Manuales</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-lg text-center shadow-sm">
+                        <div class="text-4xl font-bold text-blue-600">60%</div>
+                        <div class="mt-2 text-sm font-medium text-gray-700">Mejora en Confiabilidad de Procesos</div>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg text-center shadow-sm">
+                        <div class="text-4xl font-bold text-green-600">&lt; 5 min</div>
+                        <div class="mt-2 text-sm font-medium text-gray-700">Setup de Entorno (antes 30 min)</div>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg text-center shadow-sm">
+                        <div class="text-4xl font-bold text-green-600">5 h/sem</div>
+                        <div class="mt-2 text-sm font-medium text-gray-700">Horas Ahorradas con Scripts</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Pestaña 2: Habilidades -->
+            <section id="habilidades" data-tab-content>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Habilidades Técnicas</h3>
+                <p class="text-gray-700 mb-6 max-w-3xl">Filtra mis habilidades por categoría. Esta es un área de enfoque y aprendizaje continuo.</p>
+                
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <button data-skill-group="all" class="skill-button active py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">Todas</button>
+                    <button data-skill-group="devops" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">DevOps & Cloud</button>
+                    <button data-skill-group="scripting" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">Scripting & Sistemas</button>
+                    <button data-skill-group="industrial" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">Automatización Industrial</button>
+                    <button data-skill-group="learning" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">En Aprendizaje</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div data-skill-group="devops" class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                        <h4 class="text-lg font-semibold text-blue-700 mb-3">DevOps & Cloud</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Docker</li>
+                            <li>Docker Compose</li>
+                            <li>AWS EC2</li>
+                            <li>AWS IAM</li>
+                            <li>AWS VPC</li>
+                            <li>GitHub Actions</li>
+                        </ul>
+                    </div>
+                    <div data-skill-group="scripting" class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                        <h4 class="text-lg font-semibold text-green-700 mb-3">Scripting & Sistemas</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>Bash</li>
+                            <li>SQL</li>
+                            <li>Linux</li>
+                            <li>Git & GitHub</li>
+                        </ul>
+                    </div>
+                    <div data-skill-group="industrial" class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                        <h4 class="text-lg font-semibold text-purple-700 mb-3">Automatización Industrial</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>PLC (Programación y lógica)</li>
+                            <li>SCADA (Monitoreo)</li>
+                        </ul>
+                    </div>
+                    <div data-skill-group="learning" class="bg-yellow-50 p-5 rounded-lg border border-yellow-200 col-span-1 md:col-span-2 lg:col-span-3">
+                        <h4 class="text-lg font-semibold text-yellow-800 mb-3">En Aprendizaje</h4>
+                        <ul class="flex flex-wrap gap-x-6 gap-y-2 list-disc list-inside text-gray-700">
+                            <li>Terraform</li>
+                            <li>Kubernetes</li>
+                            <li>CI/CD Pipelines Avanzados</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pestaña 3: Experiencia & Proyectos -->
+            <section id="experiencia" data-tab-content>
+                <nav class="flex space-x-4 mb-6 border-b border-gray-200">
+                    <button data-inner-tab-target="#profesional" class="inner-tab-button active tab-button py-3 px-4 text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Experiencia Profesional</button>
+                    <button data-inner-tab-target="#proyectos" class="inner-tab-button tab-button py-3 px-4 text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Proyectos Destacados</button>
+                </nav>
+
+                <!-- Sub-Pestaña: Experiencia Profesional -->
+                <div id="profesional" data-inner-tab-content class="active">
+                    <div class="mb-6">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1">
+                            <h3 class="text-xl font-semibold text-gray-900">Operador Técnico (Automatización/SCADA)</h3>
+                            <span class="text-sm font-medium text-gray-600 sm:text-right">Ene 2023 - Presente</span>
+                        </div>
+                        <h4 class="text-lg font-medium text-blue-600">INEVH "Dr. Julio I. Maiztegui"</h4>
+                        <ul class="list-disc list-inside space-y-2 mt-4 text-gray-700">
+                            <li>Automatización con PLC reduciendo operaciones manuales en 40%.</li>
+                            <li>Desarrollo de scripts en Bash ahorrando 5 horas/semana en tareas rutinarias.</li>
+                            <li>Documentación de 15+ SOPs (Procedimientos Operativos Estándar) para un equipo de 8 operadores.</li>
+                            <li>Implementación de monitoreo y alertas en SCADA/HVAC para eventos críticos.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Sub-Pestaña: Proyectos -->
+                <div id="proyectos" data-inner-tab-content>
+                    <div class="space-y-6">
+                        <div class="p-5 bg-gray-50 rounded-lg border border-gray-200">
+                            <h3 class="text-xl font-semibold text-gray-900">API REST Containerizada</h3>
+                            <p class="text-gray-700 mt-2 mb-3">Implementación de CI con GitHub Actions y despliegue en AWS EC2 con configuración de seguridad.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">Python</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">FastAPI</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">Docker</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">AWS EC2</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">GitHub Actions</span>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-gray-50 rounded-lg border border-gray-200">
+                            <h3 class="text-xl font-semibold text-gray-900">Ecosistema DevOps</h3>
+                            <p class="text-gray-700 mt-2 mb-3">Ambiente containerizado con 4 servicios (Docker Compose), reduciendo setup de 30min a <5min. Incluye scripts de automatización y gestión de logs.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">Docker Compose</span>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">MySQL</span>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">Bash</span>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-gray-50 rounded-lg border border-gray-200">
+                            <h3 class="text-xl font-semibold text-gray-900">Automatización Industrial</h3>
+                            <p class="text-gray-700 mt-2 mb-3">Proyecto de optimización de lógica de control que resultó en una mejora del 60% en la confiabilidad de un proceso crítico.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full">PLC</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full">SCADA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pestaña 4: Educación -->
+            <section id="educacion" data-tab-content>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Educación</h3>
+                        <div class="relative pl-6 border-l-2 border-blue-200">
+                            <div class="mb-6 relative">
+                                <div class="absolute -left-8 w-4 h-4 bg-blue-600 rounded-full border-4 border-white top-1"></div>
+                                <p class="text-sm font-medium text-gray-500">2023 - 2026 (previsto)</p>
+                                <h4 class="text-lg font-semibold text-gray-800 mt-1">Licenciatura en Sistemas</h4>
+                                <p class="text-md text-gray-600">UNNOBA</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-8 w-4 h-4 bg-blue-600 rounded-full border-4 border-white top-1"></div>
+                                <p class="text-sm font-medium text-gray-500">2011 - 2017</p>
+                                <h4 class="text-lg font-semibold text-gray-800 mt-1">Técnico Electromecánico</h4>
+                                <p class="text-md text-gray-600">EEST N°1</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mt-10 mb-4">Certificaciones</h3>
+                        <div class="space-y-3">
+                            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <h4 class="text-lg font-semibold text-gray-800">Introduction to DevOps and SRE</h4>
+                                <p class="text-md text-gray-600">The Linux Foundation (2025)</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <h4 class="text-lg font-semibold text-gray-800">Técnicas de Automatización y Control Industrial</h4>
+                                <p class="text-md text-gray-600">UTN (2024)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Lógica de Pestañas Principales
+            const mainTabs = document.querySelectorAll('.tab-button[data-tab-target]');
+            const mainTabContents = document.querySelectorAll('[data-tab-content]');
+
+            mainTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = document.querySelector(tab.dataset.tabTarget);
+
+                    mainTabContents.forEach(tc => tc.classList.remove('active'));
+                    mainTabs.forEach(t => t.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    target.classList.add('active');
+                });
+            });
+
+            // Lógica de Pestañas Internas (Experiencia/Proyectos)
+            const innerTabs = document.querySelectorAll('.inner-tab-button[data-inner-tab-target]');
+            const innerTabContents = document.querySelectorAll('[data-inner-tab-content]');
+
+            innerTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = document.querySelector(tab.dataset.innerTabTarget);
+
+                    innerTabContents.forEach(tc => tc.classList.remove('active'));
+                    innerTabs.forEach(t => t.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    target.classList.add('active');
+                });
+            });
+
+            // Lógica de Filtro de Habilidades
+            const skillButtons = document.querySelectorAll('.skill-button[data-skill-group]');
+            const skillGroups = document.querySelectorAll('[data-skill-group]');
+
+            skillButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const groupToShow = button.dataset.skillGroup;
+
+                    skillButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    skillGroups.forEach(group => {
+                        if (group.tagName === 'DIV' || group.tagName === 'UL') {
+                            if (groupToShow === 'all' || group.dataset.skillGroup === groupToShow) {
+                                group.style.display = 'block';
+                            } else {
+                                group.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Lógica del Gráfico (Chart.js)
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            const impactChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Reducción Tareas Manuales (%)', 'Mejora Confiabilidad Proceso (%)'],
+                    datasets: [{
+                        label: 'Impacto Cuantificado (%)',
+                        data: [40, 60],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)', // blue
+                            'rgba(34, 197, 94, 0.6)'  // green
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(34, 197, 94, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
