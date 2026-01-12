@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Typewriter Effect ---
   const textElement = document.getElementById('typewriter-text');
-  const texts = ["Estudiante de Sistemas", "Backend & Infra", "DevOps Enthusiast"];
+  const texts = ["Estudiante de Sistemas", "Backend & Infra", "DevOps"];
   let textIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
