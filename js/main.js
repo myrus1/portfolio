@@ -37,27 +37,64 @@ document.addEventListener('DOMContentLoaded', () => {
   if (textElement) typeWriter();
 
 
+
+  // --- Mobile Menu Logic ---
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIconClosed = document.getElementById('menu-icon-closed');
+  const menuIconOpen = document.getElementById('menu-icon-open');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+      mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('hidden');
+      menuIconClosed.classList.toggle('hidden');
+      menuIconOpen.classList.toggle('hidden');
+    });
+
+    // Close menu when a link is clicked
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        menuIconClosed.classList.remove('hidden');
+        menuIconOpen.classList.add('hidden');
+      });
+    });
+  }
+
+
   // --- Tabs Logic ---
-  const tabButtons = document.querySelectorAll('[data-tab-target]');
+  const allTabButtons = document.querySelectorAll('[data-tab-target]');
+  const desktopTabButtons = document.querySelectorAll('.nav-link');
   const tabContents = document.querySelectorAll('[data-tab-content]');
 
-  tabButtons.forEach(button => {
+  allTabButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const target = document.querySelector(button.dataset.tabTarget);
+      const targetSelector = button.dataset.tabTarget;
+      const target = document.querySelector(targetSelector);
 
-      // Deactivate all
-      tabButtons.forEach(btn => btn.classList.remove('active', 'text-blue-400'));
-      tabButtons.forEach(btn => btn.classList.add('text-gray-400'));
+      // 1. Deactivate all contents
       tabContents.forEach(content => content.classList.remove('active'));
 
-      // Activate clicked
-      button.classList.add('active', 'text-blue-400');
-      button.classList.remove('text-gray-400');
-      target.classList.add('active');
+      // 2. Activate target content
+      if (target) target.classList.add('active');
 
-      // Trigger animations for charts if switching to home
-      if (button.dataset.tabTarget === '#inicio' && window.myChart) {
-        // simple re-render to animate
+      // 3. Update Desktop Button Styles
+      desktopTabButtons.forEach(btn => {
+        btn.classList.remove('active', 'text-blue-400');
+        btn.classList.add('text-gray-400');
+
+        if (btn.dataset.tabTarget === targetSelector) {
+          btn.classList.add('active', 'text-blue-400');
+          btn.classList.remove('text-gray-400');
+        }
+      });
+
+      // 4. Trigger animations for charts if switching to home
+      if (targetSelector === '#inicio' && window.myChart) {
         window.myChart.update();
       }
     });
