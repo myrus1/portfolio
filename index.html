@@ -1,370 +1,587 @@
-    <!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Interactivo | Facundo Mendez</title>
-    <!-- Chosen Palette: Calm Neutral (White/Gray) con Acentos Azules -->
-    <!-- Application Structure Plan: SPA con pestañas (Inicio, Habilidades, Experiencia/Proyectos, Educación). 'Inicio' presenta métricas clave (KPIs) del CV. 'Habilidades' usa botones interactivos para filtrar categorías. 'Experiencia/Proyectos' usa sub-pestañas para separar roles y portafolio. Esta estructura, diferente al CV lineal, guía al usuario a los datos clave (métricas, habilidades, proyectos) de forma más efectiva. -->
-    <!-- Visualization & Content Choices: [Métricas % -> Goal: Informar -> Viz: Chart.js Bar Chart ('Impacto Cuantificado') -> Interaction: Hover (tooltip) -> Justification: Visualiza los logros clave en % (40% manual, 60% confiabilidad) del CV. | Habilidades -> Goal: Organizar -> Viz: HTML/CSS + JS Toggles -> Interaction: Click botones (Cloud, Scripting) -> Justification: Permite explorar categorías sin sobrecargar y evita calificaciones subjetivas. | Experiencia/Proyectos -> Goal: Organizar -> Viz: JS Tabs Internas -> Interaction: Click tabs -> Justification: Separa y organiza contenido relacionado.] -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        [data-tab-content], [data-inner-tab-content] {
-            display: none;
-        }
-        [data-tab-content].active, [data-inner-tab-content].active {
-            display: block;
-        }
-        .tab-button.active {
-            border-color: #3b82f6;
-            color: #3b82f6;
-            font-weight: 600;
-        }
-        .tab-button {
-            border-bottom-width: 3px;
-            border-color: transparent;
-        }
-        .skill-button.active {
-            background-color: #3b82f6;
-            color: #ffffff;
-        }
-    </style>
-</head>
-<body class="text-gray-800 antialiased">
+    <title>Facundo Mendez | DevOps Engineer & Automation Specialist</title>
 
-    <main class="max-w-5xl mx-auto my-10 p-6 md:p-10 bg-white rounded-2xl shadow-lg border border-gray-200">
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Portafolio de Facundo Mendez, DevOps Engineer Junior especializado en automatización, Docker, AWS y sistemas industriales (PLC/SCADA).">
+    <meta name="keywords"
+        content="DevOps, Facundo Mendez, Automatización, Docker, AWS, Portafolio, Programador, SCADA, PLC, Python, Bash">
+    <meta name="author" content="Facundo Mendez">
+    <meta name="robots" content="index, follow">
 
-        <!-- Encabezado -->
-        <header class="text-center md:text-left pb-6 border-b border-gray-200">
-            <h1 class="text-4xl font-bold text-gray-900">Facundo Mendez</h1>
-            <h2 class="text-2xl font-semibold text-blue-600 mt-1">DevOps Engineer Junior | Automatización & Cloud</h2>
-        </header>
+    <!-- Open Graph (Social Sharing) -->
+    <meta property="og:title" content="Facundo Mendez | DevOps Engineer">
+    <meta property="og:description"
+        content="Transformando procesos manuales en sistemas confiables. Explora mis proyectos de automatización y DevOps.">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://facunmendez.dev/"> <!-- Placeholder URL -->
+    <meta property="og:image" content="assets/og-image.jpg"> <!-- Placeholder Image -->
 
-        <!-- Navegación Principal de Pestañas -->
-        <nav class="flex flex-wrap justify-center md:justify-start space-x-4 md:space-x-6 mt-6 border-b border-gray-200">
-            <button data-tab-target="#inicio" class="tab-button active py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Inicio & Métricas</button>
-            <button data-tab-target="#habilidades" class="tab-button py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Habilidades</button>
-            <button data-tab-target="#experiencia" class="tab-button py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Experiencia & Proyectos</button>
-            <button data-tab-target="#educacion" class="tab-button py-3 px-1 md:px-4 text-sm md:text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Educación</button>
-        </nav>
-
-        <!-- Contenedor del Contenido de las Pestañas -->
-        <div class="mt-8">
-
-            <!-- Pestaña 1: Inicio & Métricas -->
-            <section id="inicio" data-tab-content class="active">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Resumen Profesional</h3>
-                <p class="text-lg text-gray-700 leading-relaxed">
-                    DevOps Junior con experiencia en automatización, Docker y AWS EC2. Transición desde automatización industrial (PLC/SCADA) aplicando habilidades en entornos IT. Certificado en DevOps y SRE por The Linux Foundation.
-                </p>
-
-                <h3 class="text-2xl font-semibold text-gray-900 mt-10 mb-5">Impacto Cuantificado</h3>
-                <p class="text-gray-700 mb-6 max-w-3xl">Estas son las métricas clave de mis proyectos y experiencia, demostrando un enfoque en la eficiencia y la confiabilidad.</p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-lg text-center shadow-sm">
-                        <div class="text-4xl font-bold text-blue-600">40%</div>
-                        <div class="mt-2 text-sm font-medium text-gray-700">Reducción de Operaciones Manuales</div>
-                    </div>
-                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-lg text-center shadow-sm">
-                        <div class="text-4xl font-bold text-blue-600">60%</div>
-                        <div class="mt-2 text-sm font-medium text-gray-700">Mejora en Confiabilidad de Procesos</div>
-                    </div>
-                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg text-center shadow-sm">
-                        <div class="text-4xl font-bold text-green-600">&lt; 5 min</div>
-                        <div class="mt-2 text-sm font-medium text-gray-700">Setup de Entorno (antes 30 min)</div>
-                    </div>
-                    <div class="bg-green-50 border border-green-200 p-5 rounded-lg text-center shadow-sm">
-                        <div class="text-4xl font-bold text-green-600">5 h/sem</div>
-                        <div class="mt-2 text-sm font-medium text-gray-700">Horas Ahorradas con Scripts</div>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <canvas id="impactChart"></canvas>
-                </div>
-            </section>
-
-            <!-- Pestaña 2: Habilidades -->
-            <section id="habilidades" data-tab-content>
-                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Habilidades Técnicas</h3>
-                <p class="text-gray-700 mb-6 max-w-3xl">Filtra mis habilidades por categoría. Esta es un área de enfoque y aprendizaje continuo.</p>
-                
-                <div class="flex flex-wrap gap-3 mb-6">
-                    <button data-skill-group="all" class="skill-button active py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">Todas</button>
-                    <button data-skill-group="devops" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">DevOps & Cloud</button>
-                    <button data-skill-group="scripting" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">Scripting & Sistemas</button>
-                    <button data-skill-group="industrial" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">Automatización Industrial</button>
-                    <button data-skill-group="learning" class="skill-button py-2 px-4 bg-gray-200 text-gray-800 font-medium rounded-full transition-colors duration-200">En Aprendizaje</button>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div data-skill-group="devops" class="bg-gray-50 p-5 rounded-lg border border-gray-200">
-                        <h4 class="text-lg font-semibold text-blue-700 mb-3">DevOps & Cloud</h4>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Docker</li>
-                            <li>Docker Compose</li>
-                            <li>AWS EC2</li>
-                            <li>AWS IAM</li>
-                            <li>AWS VPC</li>
-                            <li>GitHub Actions</li>
-                        </ul>
-                    </div>
-                    <div data-skill-group="scripting" class="bg-gray-50 p-5 rounded-lg border border-gray-200">
-                        <h4 class="text-lg font-semibold text-green-700 mb-3">Scripting & Sistemas</h4>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Python</li>
-                            <li>Java</li>
-                            <li>Bash</li>
-                            <li>SQL</li>
-                            <li>Linux</li>
-                            <li>Git & GitHub</li>
-                        </ul>
-                    </div>
-                    <div data-skill-group="industrial" class="bg-gray-50 p-5 rounded-lg border border-gray-200">
-                        <h4 class="text-lg font-semibold text-purple-700 mb-3">Automatización Industrial</h4>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>PLC (Programación y lógica)</li>
-                            <li>SCADA (Monitoreo)</li>
-                        </ul>
-                    </div>
-                    <div data-skill-group="learning" class="bg-yellow-50 p-5 rounded-lg border border-yellow-200 col-span-1 md:col-span-2 lg:col-span-3">
-                        <h4 class="text-lg font-semibold text-yellow-800 mb-3">En Aprendizaje</h4>
-                        <ul class="flex flex-wrap gap-x-6 gap-y-2 list-disc list-inside text-gray-700">
-                            <li>Terraform</li>
-                            <li>Kubernetes</li>
-                            <li>CI/CD Pipelines Avanzados</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Pestaña 3: Experiencia & Proyectos -->
-            <section id="experiencia" data-tab-content>
-                <nav class="flex space-x-4 mb-6 border-b border-gray-200">
-                    <button data-inner-tab-target="#proyectos" class="inner-tab-button active tab-button py-3 px-4 text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Proyectos Destacados</button>
-                    <button data-inner-tab-target="#profesional" class="inner-tab-button  tab-button py-3 px-4 text-base font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200">Experiencia Profesional</button>
-                </nav>
-                
-                <!-- Sub-Pestaña: Proyectos -->
-                <div id="proyectos" data-inner-tab-content class="active">
-                    <div class="space-y-6">
-                        <a href="https://github.com/myrus1/pruebafastapi-app" target="_blank" rel="noopener noreferrer" class="block p-5 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md hover:border-blue-300 transition-all duration-200">
-                            <h3 class="text-xl font-semibold text-gray-900">API REST Containerizada</h3>
-                            <p class="text-gray-700 mt-2 mb-3">Implementación de CI con GitHub Actions y despliegue en AWS EC2 con configuración de seguridad.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">Python</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">FastAPI</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">Docker</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">AWS EC2</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">GitHub Actions</span>
-                            </div>
-                        </a>
-                        <a href="https://github.com/myrus1/tech-test-devops" target="_blank" rel="noopener noreferrer" class="block p-5 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md hover:border-blue-300 transition-all duration-200">
-                            <h3 class="text-xl font-semibold text-gray-900">Ecosistema DevOps</h3>
-                            <p class="text-gray-700 mt-2 mb-3">Ambiente containerizado con 4 servicios (Docker Compose), reduciendo setup de 30min a <5min. Incluye scripts de automatización y gestión de logs.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">Docker Compose</span>
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">MySQL</span>
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">Bash</span>
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">Script</span>
-                            </div>
-                        </a>
-                        <a href="https://github.com/myrus1/industrial-automation-case-study" target="_blank" rel="noopener noreferrer" class="block p-5 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md hover:border-blue-300 transition-all duration-200">
-                            <h3 class="text-xl font-semibold text-gray-900">Automatización Industrial</h3>
-                            <p class="text-gray-700 mt-2 mb-3">Proyecto de optimización de lógica de control que resultó en una mejora del 60% en la confiabilidad de un proceso crítico.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full">PLC</span>
-                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full">SCADA</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Sub-Pestaña: Experiencia Profesional -->
-                <div id="profesional" data-inner-tab-content>
-                    <div class="mb-6">
-                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1">
-                            <h3 class="text-xl font-semibold text-gray-900">Operador Técnico (Automatización/SCADA)</h3>
-                            <span class="text-sm font-medium text-gray-600 sm:text-right">Ene 2023 - Presente</span>
-                        </div>
-                        <h4 class="text-lg font-medium text-blue-600">INEVH "Dr. Julio I. Maiztegui"</h4>
-                        <ul class="list-disc list-inside space-y-2 mt-4 text-gray-700">
-                            <li>Automatización con PLC reduciendo operaciones manuales en 40%.</li>
-                            <li>Desarrollo de scripts en Bash ahorrando 5 horas/semana en tareas rutinarias.</li>
-                            <li>Documentación de 15+ SOPs (Procedimientos Operativos Estándar) para un equipo de 8 operadores.</li>
-                            <li>Implementación de monitoreo y alertas en SCADA/HVAC para eventos críticos.</li>
-                        </ul>
-                    </div>
-                </div>
-                
-            </section>
-
-            <!-- Pestaña 4: Educación -->
-            <section id="educacion" data-tab-content>
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Educación</h3>
-                        <div class="relative pl-6 border-l-2 border-blue-200">
-                            <div class="mb-6 relative">
-                                <div class="absolute -left-8 w-4 h-4 bg-blue-600 rounded-full border-4 border-white top-1"></div>
-                                <p class="text-sm font-medium text-gray-500">2023 - 2026 (previsto)</p>
-                                <h4 class="text-lg font-semibold text-gray-800 mt-1">Licenciatura en Sistemas</h4>
-                                <p class="text-md text-gray-600">UNNOBA</p>
-                            </div>
-                            <div class="relative">
-                                <div class="absolute -left-8 w-4 h-4 bg-blue-600 rounded-full border-4 border-white top-1"></div>
-                                <p class="text-sm font-medium text-gray-500">2011 - 2017</p>
-                                <h4 class="text-lg font-semibold text-gray-800 mt-1">Técnico Electromecánico</h4>
-                                <p class="text-md text-gray-600">EEST N°1</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mt-10 mb-4">Certificaciones</h3>
-                        <div class="space-y-3">
-                            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <h4 class="text-lg font-semibold text-gray-800">Introduction to DevOps and SRE</h4>
-                                <p class="text-md text-gray-600">The Linux Foundation (2025)</p>
-                            </div>
-                            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <h4 class="text-lg font-semibold text-gray-800">Técnicas de Automatización y Control Industrial</h4>
-                                <p class="text-md text-gray-600">UTN (2024)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-        </div>
-    </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // Lógica de Pestañas Principales
-            const mainTabs = document.querySelectorAll('.tab-button[data-tab-target]');
-            const mainTabContents = document.querySelectorAll('[data-tab-content]');
-
-            mainTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const target = document.querySelector(tab.dataset.tabTarget);
-
-                    mainTabContents.forEach(tc => tc.classList.remove('active'));
-                    mainTabs.forEach(t => t.classList.remove('active'));
-
-                    tab.classList.add('active');
-                    target.classList.add('active');
-                });
-            });
-
-            // Lógica de Pestañas Internas (Experiencia/Proyectos)
-            const innerTabs = document.querySelectorAll('.inner-tab-button[data-inner-tab-target]');
-            const innerTabContents = document.querySelectorAll('[data-inner-tab-content]');
-
-            innerTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const target = document.querySelector(tab.dataset.innerTabTarget);
-
-                    innerTabContents.forEach(tc => tc.classList.remove('active'));
-                    innerTabs.forEach(t => t.classList.remove('active'));
-
-                    tab.classList.add('active');
-                    target.classList.add('active');
-                });
-            });
-
-            // Lógica de Filtro de Habilidades
-            const skillButtons = document.querySelectorAll('.skill-button[data-skill-group]');
-            const skillGroups = document.querySelectorAll('[data-skill-group]');
-
-            skillButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const groupToShow = button.dataset.skillGroup;
-
-                    skillButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    skillGroups.forEach(group => {
-                        if (group.tagName === 'DIV' || group.tagName === 'UL') {
-                            if (groupToShow === 'all' || group.dataset.skillGroup === groupToShow) {
-                                group.style.display = 'block';
-                            } else {
-                                group.style.display = 'none';
-                            }
-                        }
-                    });
-                });
-            });
-
-            // Lógica del Gráfico (Chart.js)
-            const ctx = document.getElementById('impactChart').getContext('2d');
-            const impactChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Reducción Tareas Manuales (%)', 'Mejora Confiabilidad Proceso (%)'],
-                    datasets: [{
-                        label: 'Impacto Cuantificado (%)',
-                        data: [40, 60],
-                        backgroundColor: [
-                            'rgba(59, 130, 246, 0.6)', // blue
-                            'rgba(34, 197, 94, 0.6)'  // green
-                        ],
-                        borderColor: [
-                            'rgba(59, 130, 246, 1)',
-                            'rgba(34, 197, 94, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw}%`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-        });
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Facundo Mendez",
+      "jobTitle": "DevOps Engineer",
+      "url": "https://linkedin.com/in/facundo-mendez-b316a621b",
+      "sameAs": [
+        "https://github.com/myrus1",
+        "https://linkedin.com/in/facundo-mendez-b316a621b"
+      ],
+      "knowsAbout": ["DevOps", "Automatización Industrial", "Docker", "AWS", "Python", "SCADA"]
+    }
     </script>
 
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a',
+                        card: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+</head>
+
+<body class="bg-dark text-slate-300 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-700/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-bold text-xl text-white tracking-wider">
+                    FM<span class="text-blue-500">.dev</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <button data-tab-target="#inicio"
+                            class="nav-link active px-3 py-2 rounded-md text-sm font-medium">Inicio</button>
+                        <button data-tab-target="#habilidades"
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Habilidades</button>
+                        <button data-tab-target="#experiencia"
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Proyectos</button>
+                        <button data-tab-target="#educacion"
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Educación</button>
+                        <button data-tab-target="#contacto"
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Contacto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+
+        <!-- Tab 1: Inicio (Hero & Metrics) -->
+        <section id="inicio" data-tab-content class="active tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                <!-- Hero Text -->
+                <div class="lg:col-span-12 text-center mb-10 mt-5">
+                    <p class="text-blue-500 font-medium mb-2 tracking-wide uppercase text-sm animate-fade-in">Hola, soy
+                    </p>
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 animate-fade-in delay-100">
+                        Facundo Mendez
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl text-gray-400 font-light mb-8 animate-fade-in delay-200 h-8">
+                        <span id="typewriter-text" class="text-gradient font-semibold"></span><span
+                            class="cursor"></span>
+                    </h2>
+                    <p class="max-w-3xl mx-auto text-lg text-gray-400 leading-relaxed animate-fade-in delay-300">
+                        Soy estudiante Avanzado en Sistemas, me apasiona el mundo del Backend e Infraestructura.
+                        Mi formación técnica proviene de la automatización industrial, lo que me ha dado una mentalidad
+                        pragmática para la resolución de problemas y la optimización de procesos.
+                        Actualmente, aplico metodologías ágiles para construir soluciones robustas integrando servicios
+                        de AWS y entornos Linux
+                    </p>
+                </div>
+
+                <!-- Metrics Cards 
+                <div
+                    class="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-fade-in delay-300">
+                    <div class="glass-card p-6 rounded-xl text-center">
+                        <div class="text-4xl font-bold text-blue-500 mb-2">40%</div>
+                        <div class="text-sm text-gray-400">Reducción Op. Manuales</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl text-center">
+                        <div class="text-4xl font-bold text-green-500 mb-2">60%</div>
+                        <div class="text-sm text-gray-400">Mejora Confiabilidad</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl text-center">
+                        <div class="text-4xl font-bold text-purple-500 mb-2">&lt; 5m</div>
+                        <div class="text-sm text-gray-400">Setup Time (antes 30m)</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl text-center">
+                        <div class="text-4xl font-bold text-amber-500 mb-2">5h+</div>
+                        <div class="text-sm text-gray-400">Ahorro Semanal</div>
+                    </div>
+                </div>
+                -->
+
+                <!-- Terminal Section (Replaces Chart) -->
+                <div class="lg:col-span-12 animate-fade-in delay-300">
+                    <div
+                        class="bg-slate-900 rounded-lg shadow-2xl overflow-hidden border border-slate-700 font-mono text-sm md:text-base mx-auto max-w-4xl">
+                        <div class="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-2 text-xs text-gray-400">facundo@devops:~/profile</span>
+                        </div>
+                        <div class="p-6 text-gray-300 space-y-4">
+                            <div>
+                                <span class="text-green-400">facundo@devops</span>:<span class="text-blue-400">~</span>$
+                                cat profile.json
+                            </div>
+                            <div class="pl-4 text-emerald-300">
+                                {<br>
+                                &nbsp;&nbsp;"role": "DevOps Junior",<br>
+                                &nbsp;&nbsp;"location": "Pergamino, Buenos Aires, AR",<br>
+                                &nbsp;&nbsp;"email": "mendezfacundo80@gmail.com",<br>
+                                &nbsp;&nbsp;"focus": ["AWS", "Docker", "Automation", "Linux"],<br>
+                                &nbsp;&nbsp;"current_learning": ["Terraform", "Kubernetes"]<br>
+                                }
+                            </div>
+                            <div>
+                                <span class="text-green-400">facundo@devops</span>:<span class="text-blue-400">~</span>$
+                                <span class="animate-pulse">_</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Tab 2: Habilidades -->
+        <section id="habilidades" data-tab-content class="tab-content">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">Arsenal Técnico</h2>
+                <div class="flex flex-wrap justify-center gap-4 mt-6">
+                    <button data-skill-group="all"
+                        class="skill-btn active bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-medium">Todas</button>
+                    <button data-skill-group="devops"
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">DevOps
+                        & Cloud</button>
+                    <button data-skill-group="scripting"
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">Scripting</button>
+                    <button data-skill-group="industrial"
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">Industrial</button>
+                    <button data-skill-group="web"
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">Web
+                        Dev</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- DevOps -->
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="devops">
+                    <img src="https://img.icons8.com/color/48/000000/docker.png" alt="Docker"
+                        class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">Docker</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="devops">
+                    <img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS"
+                        class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">AWS EC2/VPC</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="devops">
+                    <!-- Github Actions Icon Placeholder or Text -->
+                    <div
+                        class="h-12 w-12 mx-auto bg-gray-700 rounded-full flex items-center justify-center mb-3 font-bold text-white">
+                        GH</div>
+                    <h4 class="font-medium text-white">GitHub Actions</h4>
+                </div>
+
+                <!-- Scripting -->
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="scripting">
+                    <img src="https://img.icons8.com/color/48/000000/python--v1.png" alt="Python"
+                        class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">Python</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="scripting">
+                    <img src="https://img.icons8.com/color/48/000000/bash.png" alt="Bash"
+                        class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">Bash</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="scripting">
+                    <img src="https://img.icons8.com/color/48/000000/git.png" alt="Git" class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">Git</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="scripting">
+                    <img src="https://img.icons8.com/color/48/000000/sql.png" alt="SQL" class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">SQL</h4>
+                </div>
+
+                <!-- Industrial -->
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="industrial">
+                    <div
+                        class="h-12 w-12 mx-auto bg-purple-900 rounded-full flex items-center justify-center mb-3 font-bold text-white text-xs">
+                        PLC</div>
+                    <h4 class="font-medium text-white">PLC Logic</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="industrial">
+                    <div
+                        class="h-12 w-12 mx-auto bg-purple-900 rounded-full flex items-center justify-center mb-3 font-bold text-white text-xs">
+                        SCADA</div>
+                    <h4 class="font-medium text-white">SCADA Focus</h4>
+                </div>
+
+                <!-- Web Dev -->
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="web">
+                    <img src="https://img.icons8.com/color/48/000000/html-5--v1.png" alt="HTML5"
+                        class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">HTML5</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="web">
+                    <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS3"
+                        class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">CSS3</h4>
+                </div>
+                <div class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+                    data-group="web">
+                    <img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JavaScript"
+                        class="mx-auto h-12 w-12 mb-3">
+                    <h4 class="font-medium text-white">JavaScript</h4>
+                </div>
+            </div>
+
+            <!-- Learning -->
+            <div class="mt-12 glass p-6 rounded-xl border-l-4 border-yellow-500">
+                <h4 class="text-lg font-semibold text-yellow-500 mb-2">Actualmente Aprendiendo</h4>
+                <div class="flex gap-4 text-gray-400">
+                    <span>Terraform</span> • <span>Kubernetes</span> • <span>Advanced CI/CD</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Tab 3: Experiencia & Proyectos -->
+        <section id="experiencia" data-tab-content class="tab-content">
+
+            <div class="flex justify-center space-x-4 mb-10">
+                <button data-inner-tab-target="#proyectos"
+                    class="inner-tab px-6 py-2 rounded-full font-medium transition-colors bg-blue-600 text-white shadow-lg shadow-blue-500/30">Proyectos</button>
+                <button data-inner-tab-target="#profesional"
+                    class="inner-tab px-6 py-2 rounded-full font-medium transition-colors text-gray-400 hover:text-white hover:bg-slate-800">Experiencia
+                    Laboral</button>
+            </div>
+
+            <!-- Proyectos -->
+            <div id="proyectos" data-inner-tab-content class="grid md:grid-cols-2 gap-6 animate-fade-in">
+
+                <a href="https://github.com/myrus1/pruebafastapi-app" target="_blank"
+                    class="glass-card p-6 rounded-xl group block">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">API REST
+                            Containerizada</h3>
+                        <span class="text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded">DevOps</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                        Implementación de CI con GitHub Actions y despliegue en AWS EC2. Configuración de seguridad y
+                        Dockerización completa.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-blue-300 border border-slate-700">FastAPI</span>
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-blue-300 border border-slate-700">Docker</span>
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-blue-300 border border-slate-700">AWS</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/myrus1/tech-test-devops" target="_blank"
+                    class="glass-card p-6 rounded-xl group block">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors">Ecosistema
+                            DevOps</h3>
+                        <span class="text-xs bg-green-900 text-green-200 px-2 py-1 rounded">Infra</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                        Ambiente con 4 servicios orquestados (Docker Compose). Reducción de setup time de 30min a
+                        &lt;5min mediante scripting.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">Compose</span>
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">Bash</span>
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">MySQL</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/myrus1/industrial-automation-case-study" target="_blank"
+                    class="glass-card p-6 rounded-xl group block">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">
+                            Automatización Industrial</h3>
+                        <span class="text-xs bg-purple-900 text-purple-200 px-2 py-1 rounded">IoT/OT</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                        Caso de estudio: Optimización de lógica de control resultando en 60% de mejora en confiabilidad
+                        de procesos críticos.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-purple-300 border border-slate-700">PLC</span>
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-purple-300 border border-slate-700">SCADA</span>
+                    </div>
+                </a>
+
+                <a href="https://luzverdepergamino.com.ar/" target="_blank"
+                    class="glass-card p-6 rounded-xl group block">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">
+                            Autoescuela Luz Verde</h3>
+                        <span class="text-xs bg-yellow-900 text-yellow-200 px-2 py-1 rounded">Web</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                        Landing page moderna optimizada para conversión y SEO. Diseño responsive y animaciones
+                        interactivas.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-yellow-300 border border-slate-700">HTML</span>
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-yellow-300 border border-slate-700">CSS</span>
+                        <span
+                            class="px-2 py-1 bg-slate-800 rounded text-xs text-yellow-300 border border-slate-700">JavaScript</span>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- Experiencia (Inicialmente Oculto) -->
+            <div id="profesional" data-inner-tab-content class="hidden animate-fade-in space-y-6">
+                <div class="glass-card p-6 rounded-xl border-l-4 border-blue-600 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-5">
+                        <img src="https://img.icons8.com/ios-filled/100/ffffff/server.png" alt="server">
+                    </div>
+                    <div class="md:flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Operador Técnico (Automatización/SCADA)</h3>
+                            <p class="text-blue-400">INEVH "Dr. Julio I. Maiztegui"</p>
+                        </div>
+                        <span
+                            class="text-sm bg-slate-800 px-3 py-1 rounded-full text-gray-400 mt-2 md:mt-0 inline-block">Ene
+                            2023 - Presente</span>
+                    </div>
+
+                    <ul class="space-y-3 text-gray-300 text-sm marker:text-blue-500 list-disc list-inside">
+                        <li><span class="text-white font-medium">Automatización:</span> Automatización con PLC,
+                            reduciendo operaciones manuales en 40% y liberando 5 h/semana.</li>
+                        <li><span class="text-white font-medium">Documentación:</span> Estandaricé procesos con 15+ SOPs
+                            en sistema LOYAL mejorando la trazabilidad.</li>
+                        <li><span class="text-white font-medium">Monitoreo:</span> Instrumenté monitoreo y alertas en
+                            SCADA/HVAC, reduciendo tiempos de respuesta ante eventos críticos.</li>
+                        <li><span class="text-white font-medium">DevOps:</span> Contenericé un entorno de prueba con
+                            Docker/Compose.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Tab 4: Educación -->
+        <section id="educacion" data-tab-content class="tab-content">
+            <div class="max-w-3xl mx-auto relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-700"></div>
+
+                <!-- Item 1 -->
+                <div class="relative pl-20 mb-12 group">
+                    <div
+                        class="absolute left-6 top-1 w-5 h-5 bg-blue-600 rounded-full border-4 border-slate-900 z-10 group-hover:scale-125 transition-transform">
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <span class="text-xs font-semibold tracking-wide text-blue-400 uppercase">2023 - 2026 (En
+                            Curso)</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Licenciatura en Sistemas</h3>
+                        <p class="text-gray-400">UNNOBA</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative pl-20 mb-12 group">
+                    <div
+                        class="absolute left-6 top-1 w-5 h-5 bg-gray-600 rounded-full border-4 border-slate-900 z-10 group-hover:scale-125 transition-transform">
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <span class="text-xs font-semibold tracking-wide text-gray-500 uppercase">2011 - 2017</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Técnico Electromecánico</h3>
+                        <p class="text-gray-400">EEST N°1</p>
+                    </div>
+                </div>
+
+                <!-- Certifications Section -->
+                <div class="ml-20 mt-10">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
+                            </path>
+                        </svg>
+                        Certificaciones
+                    </h3>
+                    <div class="grid gap-4">
+                        <div
+                            class="glass p-4 rounded-lg flex items-center justify-between hover:bg-slate-800 transition-colors">
+                            <div>
+                                <h4 class="font-semibold text-white">Introduction to DevOps and SRE</h4>
+                                <p class="text-sm text-gray-500">The Linux Foundation (2025)</p>
+                            </div>
+                            <span
+                                class="text-green-500 text-sm border border-green-500/30 px-2 py-1 rounded">Verificado</span>
+                        </div>
+                        <div
+                            class="glass p-4 rounded-lg flex items-center justify-between hover:bg-slate-800 transition-colors">
+                            <div>
+                                <h4 class="font-semibold text-white">Técnicas de Automatización y Control</h4>
+                                <p class="text-sm text-gray-500">UTN (2024)</p>
+                            </div>
+                            <span
+                                class="text-blue-500 text-sm border border-blue-500/30 px-2 py-1 rounded">Completado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Próximos Cursos -->
+                <div class="ml-20 mt-10">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                        Próximos Cursos
+                    </h3>
+                    <div
+                        class="glass p-4 rounded-lg flex items-center justify-between hover:bg-slate-800 transition-colors">
+                        <div>
+                            <h4 class="font-semibold text-white">AWS Certified Cloud Practitioner</h4>
+                            <p class="text-sm text-gray-500">En preparación</p>
+                        </div>
+                        <span class="text-yellow-500 text-sm border border-yellow-500/30 px-2 py-1 rounded">En
+                            Curso</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Tab 5: Contacto -->
+        <section id="contacto" data-tab-content class="tab-content">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-white mb-6">Conectemos</h2>
+                <p class="text-gray-400 mb-12 text-lg">Estoy siempre abierto a discutir nuevos proyectos, ideas
+                    creativas o oportunidades de ser parte de tus visiones.</p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/facundo-mendez-b316a621b" target="_blank"
+                        class="group glass-card p-8 rounded-2xl hover:bg-blue-900/20 transition-all duration-300">
+                        <div
+                            class="w-16 h-16 mx-auto bg-blue-600 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">LinkedIn</h3>
+                        <p class="text-blue-400 text-sm">Ver Perfil Profesional</p>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/myrus1" target="_blank"
+                        class="group glass-card p-8 rounded-2xl hover:bg-gray-800/50 transition-all duration-300">
+                        <div
+                            class="w-16 h-16 mx-auto bg-gray-700 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-gray-700/30 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">GitHub</h3>
+                        <p class="text-gray-400 text-sm">Ver Repositorios</p>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:mendezfacundo80@gmail.com"
+                        class="group glass-card p-8 rounded-2xl hover:bg-red-900/20 transition-all duration-300">
+                        <div
+                            class="w-16 h-16 mx-auto bg-red-600 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-red-600/30 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Email</h3>
+                        <p class="text-red-400 text-sm">Enviar Correo</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-8 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2026 Facundo Mendez. Built with <span class="text-blue-500">Tailwind</span> & <span
+                    class="text-yellow-500">Coffee</span>.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://www.linkedin.com/in/facundo-mendez-b316a621b" target="_blank"
+                    class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://github.com/myrus1" target="_blank"
+                    class="hover:text-white transition-colors">GitHub</a>
+                <a href="mailto:mendezfacundo80@gmail.com" class="hover:text-white transition-colors">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main Logic -->
+    <script src="js/main.js"></script>
 </body>
+
 </html>
