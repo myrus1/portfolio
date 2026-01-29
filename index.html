@@ -76,18 +76,32 @@
                     FMENDEZ<span class="text-blue-500">.dev</span>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
+                    <div class="ml-10 flex items-baseline space-x-5">
                         <button data-tab-target="#inicio"
-                            class="nav-link active px-3 py-2 rounded-md text-sm font-medium">Inicio</button>
+                            class="nav-link active px-3 py-2 rounded-md text-sm font-medium"
+                            data-i18n="nav_home">Home</button>
                         <button data-tab-target="#habilidades"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Habilidades</button>
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white"
+                            data-i18n="nav_skills">Skills</button>
                         <button data-tab-target="#experiencia"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Proyectos</button>
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white"
+                            data-i18n="nav_projects">Projects</button>
                         <button data-tab-target="#educacion"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Educación</button>
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white"
+                            data-i18n="nav_education">Education</button>
                         <button data-tab-target="#contacto"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white">Contacto</button>
+                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white"
+                            data-i18n="nav_contact">Contact</button>
                     </div>
+                </div>
+
+                <!-- Language Switcher -->
+                <div class="hidden md:flex items-center space-x-2 ml-4 border-l border-slate-700 pl-4">
+                    <button id="btn-en"
+                        class="text-white font-bold text-sm hover:text-blue-400 transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button id="btn-es"
+                        class="text-gray-400 font-normal text-sm hover:text-blue-400 transition-colors">ES</button>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -139,7 +153,8 @@
 
                 <!-- Hero Text -->
                 <div class="lg:col-span-12 text-center mb-10 mt-5">
-                    <p class="text-blue-500 font-medium mb-2 tracking-wide uppercase text-sm animate-fade-in">Hola, soy
+                    <p class="text-blue-500 font-medium mb-2 tracking-wide uppercase text-sm animate-fade-in"
+                        data-i18n="hero_greeting">Hello, I am
                     </p>
                     <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 animate-fade-in delay-100">
                         Facundo Mendez
@@ -148,12 +163,13 @@
                         <span id="typewriter-text" class="text-gradient font-semibold"></span><span
                             class="cursor"></span>
                     </h2>
-                    <p class="max-w-3xl mx-auto text-lg text-gray-400 leading-relaxed animate-fade-in delay-300">
-                        Soy estudiante Avanzado en Sistemas, me apasiona el mundo del Backend e Infraestructura.
-                        Mi formación técnica proviene de la automatización industrial, lo que me ha dado una mentalidad
-                        pragmática para la resolución de problemas y la optimización de procesos.
-                        Actualmente, aplico metodologías ágiles para construir soluciones robustas integrando servicios
-                        de AWS y entornos Linux
+                    <p class="max-w-3xl mx-auto text-lg text-gray-400 leading-relaxed animate-fade-in delay-300"
+                        data-i18n="hero_description">
+                        I am an Advanced Systems Student, passionate about the world of Backend and Infrastructure.
+                        My technical background comes from industrial automation, giving me a pragmatic mindset
+                        for problem-solving and process optimization.
+                        Currently, I apply agile methodologies to build robust solutions integrating AWS services
+                        and Linux environments
                     </p>
                 </div>
 
@@ -187,7 +203,8 @@
                             <div class="w-3 h-3 rounded-full bg-red-500"></div>
                             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                             <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="ml-2 text-xs text-gray-400">facundo@devops:~/profile</span>
+                            <span class="ml-2 text-xs text-gray-400"
+                                data-i18n="terminal_user">facundo@devops:~/profile</span>
                         </div>
                         <div class="p-6 text-gray-300 space-y-4">
                             <div>
@@ -218,19 +235,24 @@
         <!-- Tab 2: Habilidades -->
         <section id="habilidades" data-tab-content class="tab-content">
             <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-white mb-4">Arsenal Técnico</h2>
+                <h2 class="text-3xl font-bold text-white mb-4" data-i18n="skills_title">Technical Arsenal</h2>
                 <div class="flex flex-wrap justify-center gap-4 mt-6">
                     <button data-skill-group="all"
-                        class="skill-btn active bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-medium">Todas</button>
+                        class="skill-btn active bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-medium"
+                        data-i18n="skills_all">All</button>
                     <button data-skill-group="devops"
-                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">DevOps
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700"
+                        data-i18n="skills_devops">DevOps
                         & Cloud</button>
                     <button data-skill-group="scripting"
-                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">Scripting</button>
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700"
+                        data-i18n="skills_scripting">Scripting</button>
                     <button data-skill-group="industrial"
-                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">Industrial</button>
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700"
+                        data-i18n="skills_industrial">Industrial</button>
                     <button data-skill-group="web"
-                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700">Web
+                        class="skill-btn bg-gray-800 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-700"
+                        data-i18n="skills_web">Web
                         Dev</button>
                 </div>
             </div>
@@ -321,7 +343,8 @@
 
             <!-- Learning -->
             <div class="mt-12 glass p-6 rounded-xl border-l-4 border-yellow-500">
-                <h4 class="text-lg font-semibold text-yellow-500 mb-2">Actualmente Aprendiendo</h4>
+                <h4 class="text-lg font-semibold text-yellow-500 mb-2" data-i18n="learning_title">Currently Learning
+                </h4>
                 <div class="flex gap-4 text-gray-400">
                     <span>Terraform</span> • <span>Kubernetes</span> • <span>Advanced CI/CD</span>
                 </div>
@@ -334,10 +357,11 @@
 
             <div class="flex justify-center space-x-4 mb-10">
                 <button data-inner-tab-target="#proyectos"
-                    class="inner-tab px-6 py-2 rounded-full font-medium transition-colors bg-blue-600 text-white shadow-lg shadow-blue-500/30">Proyectos</button>
+                    class="inner-tab px-6 py-2 rounded-full font-medium transition-colors bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+                    data-i18n="projects_tab">Projects</button>
                 <button data-inner-tab-target="#profesional"
-                    class="inner-tab px-6 py-2 rounded-full font-medium transition-colors text-gray-400 hover:text-white hover:bg-slate-800">Experiencia
-                    Laboral</button>
+                    class="inner-tab px-6 py-2 rounded-full font-medium transition-colors text-gray-400 hover:text-white hover:bg-slate-800"
+                    data-i18n="experience_tab">Work Experience</button>
             </div>
 
             <!-- Proyectos -->
@@ -346,13 +370,13 @@
                 <a href="https://github.com/myrus1/pruebafastapi-app" target="_blank"
                     class="glass-card p-6 rounded-xl group block">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">API REST
-                            Containerizada</h3>
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors"
+                            data-i18n="project_api_title">Containerized REST API</h3>
                         <span class="text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded">DevOps</span>
                     </div>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                        Implementación de CI con GitHub Actions y despliegue en AWS EC2. Configuración de seguridad y
-                        Dockerización completa.
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed" data-i18n="project_api_desc">
+                        CI implementation with GitHub Actions and deployment on AWS EC2. Security configuration and full
+                        Dockerization.
                     </p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span
@@ -367,34 +391,34 @@
                 <a href="https://github.com/myrus1/tech-test-devops" target="_blank"
                     class="glass-card p-6 rounded-xl group block">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors">Ecosistema
-                            DevOps</h3>
+                        <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors"
+                            data-i18n="project_ecosystem_title">DevOps Ecosystem</h3>
                         <span class="text-xs bg-green-900 text-green-200 px-2 py-1 rounded">Infra</span>
                     </div>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                        Ambiente con 4 servicios orquestados (Docker Compose). Reducción de setup time de 30min a
-                        &lt;5min mediante scripting.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span
-                            class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">Compose</span>
-                        <span
-                            class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">Bash</span>
-                        <span
-                            class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">MySQL</span>
-                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed" data-i18n="project_ecosystem_desc">
+                        Environment with 4 orchestrated services (Docker Compose). Setup time reduction from 30min to
+                        <5min via scripting. </p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">Compose</span>
+                                <span
+                                    class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">Bash</span>
+                                <span
+                                    class="px-2 py-1 bg-slate-800 rounded text-xs text-green-300 border border-slate-700">MySQL</span>
+                            </div>
                 </a>
 
                 <a href="https://github.com/myrus1/industrial-automation-case-study" target="_blank"
                     class="glass-card p-6 rounded-xl group block">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">
-                            Automatización Industrial</h3>
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors"
+                            data-i18n="project_automation_title">
+                            Industrial Automation</h3>
                         <span class="text-xs bg-purple-900 text-purple-200 px-2 py-1 rounded">IoT/OT</span>
                     </div>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                        Caso de estudio: Optimización de lógica de control resultando en 60% de mejora en confiabilidad
-                        de procesos críticos.
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed" data-i18n="project_automation_desc">
+                        Case study: Control logic optimization resulting in 60% reliability improvement of critical
+                        processes.
                     </p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span
@@ -407,13 +431,14 @@
                 <a href="https://luzverdepergamino.com.ar/" target="_blank"
                     class="glass-card p-6 rounded-xl group block">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">
-                            Autoescuela Luz Verde</h3>
+                        <h3 class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors"
+                            data-i18n="project_luzverde_title">
+                            Luz Verde Driving School</h3>
                         <span class="text-xs bg-yellow-900 text-yellow-200 px-2 py-1 rounded">Web</span>
                     </div>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                        Landing page moderna optimizada para conversión y SEO. Diseño responsive y animaciones
-                        interactivas.
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed" data-i18n="project_luzverde_desc">
+                        Modern landing page optimized for conversion and SEO. Responsive design and interactive
+                        animations.
                     </p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span
@@ -435,23 +460,25 @@
                     </div>
                     <div class="md:flex justify-between items-start mb-4">
                         <div>
-                            <h3 class="text-xl font-bold text-white">Operador Técnico (Automatización/SCADA)</h3>
+                            <h3 class="text-xl font-bold text-white" data-i18n="exp_job_title">Technical Operator
+                                (Automation/SCADA)</h3>
                             <p class="text-blue-400">INEVH "Dr. Julio I. Maiztegui"</p>
                         </div>
                         <span
-                            class="text-sm bg-slate-800 px-3 py-1 rounded-full text-gray-400 mt-2 md:mt-0 inline-block">Ene
-                            2023 - Presente</span>
+                            class="text-sm bg-slate-800 px-3 py-1 rounded-full text-gray-400 mt-2 md:mt-0 inline-block">Jan
+                            2023 - Present</span>
                     </div>
 
                     <ul class="space-y-3 text-gray-300 text-sm marker:text-blue-500 list-disc list-inside">
-                        <li><span class="text-white font-medium">Automatización:</span> Automatización con PLC,
-                            reduciendo operaciones manuales en 40% y liberando 5 h/semana.</li>
-                        <li><span class="text-white font-medium">Documentación:</span> Estandaricé procesos con 15+ SOPs
-                            en sistema LOYAL mejorando la trazabilidad.</li>
-                        <li><span class="text-white font-medium">Monitoreo:</span> Instrumenté monitoreo y alertas en
-                            SCADA/HVAC, reduciendo tiempos de respuesta ante eventos críticos.</li>
-                        <li><span class="text-white font-medium">DevOps:</span> Contenericé un entorno de prueba con
-                            Docker/Compose.</li>
+                        <li data-i18n="exp_job_desc_1"><span class="text-white font-medium">Automation:</span> PLC
+                            automation, reducing manual operations by 40% and freeing up 5 hrs/week.</li>
+                        <li data-i18n="exp_job_desc_2"><span class="text-white font-medium">Documentation:</span>
+                            Standardized processes with 15+ SOPs in LOYAL system improving traceability.</li>
+                        <li data-i18n="exp_job_desc_3"><span class="text-white font-medium">Monitoring:</span>
+                            Instrumented monitoring and alerts in SCADA/HVAC, reducing response times for critical
+                            events.</li>
+                        <li data-i18n="exp_job_desc_4"><span class="text-white font-medium">DevOps:</span> Containerized
+                            a test environment with Docker/Compose.</li>
                     </ul>
                 </div>
             </div>
@@ -471,10 +498,10 @@
                         class="absolute left-6 top-1 w-5 h-5 bg-blue-600 rounded-full border-4 border-slate-900 z-10 group-hover:scale-125 transition-transform">
                     </div>
                     <div class="glass-card p-6 rounded-xl">
-                        <span class="text-xs font-semibold tracking-wide text-blue-400 uppercase">2023 - 2026 (En
-                            Curso)</span>
-                        <h3 class="text-xl font-bold text-white mt-1">Licenciatura en Sistemas</h3>
-                        <p class="text-gray-400">UNNOBA</p>
+                        <span class="text-xs font-semibold tracking-wide text-blue-400 uppercase"
+                            data-i18n="edu_time_1">2023 - 2026 (In Progress)</span>
+                        <h3 class="text-xl font-bold text-white mt-1" data-i18n="edu_title_1">Systems Degree</h3>
+                        <p class="text-gray-400" data-i18n="edu_desc_1">UNNOBA</p>
                     </div>
                 </div>
 
@@ -484,9 +511,11 @@
                         class="absolute left-6 top-1 w-5 h-5 bg-gray-600 rounded-full border-4 border-slate-900 z-10 group-hover:scale-125 transition-transform">
                     </div>
                     <div class="glass-card p-6 rounded-xl">
-                        <span class="text-xs font-semibold tracking-wide text-gray-500 uppercase">2011 - 2017</span>
-                        <h3 class="text-xl font-bold text-white mt-1">Técnico Electromecánico</h3>
-                        <p class="text-gray-400">EEST N°1</p>
+                        <span class="text-xs font-semibold tracking-wide text-gray-500 uppercase"
+                            data-i18n="edu_time_2">2011 - 2017</span>
+                        <h3 class="text-xl font-bold text-white mt-1" data-i18n="edu_title_2">Electromechanical
+                            Technician</h3>
+                        <p class="text-gray-400" data-i18n="edu_desc_2">EEST N°1</p>
                     </div>
                 </div>
 
@@ -530,16 +559,18 @@
                                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
                             </path>
                         </svg>
-                        Próximos Cursos
+                        <span data-i18n="courses_title">Upcoming Courses</span>
                     </h3>
                     <div
                         class="glass p-4 rounded-lg flex items-center justify-between hover:bg-slate-800 transition-colors">
                         <div>
-                            <h4 class="font-semibold text-white">AWS Certified Cloud Practitioner</h4>
-                            <p class="text-sm text-gray-500">En preparación</p>
+                            <h4 class="font-semibold text-white" data-i18n="course_1_name">AWS Certified Cloud
+                                Practitioner</h4>
+                            <p class="text-sm text-gray-500" data-i18n="course_1_desc">In preparation</p>
                         </div>
-                        <span class="text-yellow-500 text-sm border border-yellow-500/30 px-2 py-1 rounded">En
-                            Curso</span>
+                        <span class="text-yellow-500 text-sm border border-yellow-500/30 px-2 py-1 rounded"
+                            data-i18n="course_1_status">In
+                            Progress</span>
                     </div>
                 </div>
 
@@ -549,9 +580,9 @@
         <!-- Tab 5: Contacto -->
         <section id="contacto" data-tab-content class="tab-content">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl font-bold text-white mb-6">Conectemos</h2>
-                <p class="text-gray-400 mb-12 text-lg">Estoy siempre abierto a discutir nuevos proyectos, ideas
-                    creativas o oportunidades de ser parte de tus visiones.</p>
+                <h2 class="text-4xl font-bold text-white mb-6" data-i18n="contact_title">Let's Connect</h2>
+                <p class="text-gray-400 mb-12 text-lg" data-i18n="contact_desc">I am always open to discussing new
+                    projects, creative ideas, or opportunities to be part of your visions.</p>
 
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- LinkedIn -->
@@ -565,7 +596,8 @@
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">LinkedIn</h3>
-                        <p class="text-blue-400 text-sm">Ver Perfil Profesional</p>
+                        <p class="text-blue-400 text-sm" data-i18n="contact_linkedin_action">View Professional Profile
+                        </p>
                     </a>
 
                     <!-- GitHub -->
@@ -579,7 +611,7 @@
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">GitHub</h3>
-                        <p class="text-gray-400 text-sm">Ver Repositorios</p>
+                        <p class="text-gray-400 text-sm" data-i18n="contact_github_action">View Repositories</p>
                     </a>
 
                     <!-- Email -->
@@ -594,7 +626,7 @@
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Email</h3>
-                        <p class="text-red-400 text-sm">Enviar Correo</p>
+                        <p class="text-red-400 text-sm" data-i18n="contact_email_action">Send Email</p>
                     </a>
                 </div>
             </div>
@@ -605,8 +637,9 @@
     <!-- Footer -->
     <footer class="border-t border-slate-800 py-8 mt-auto">
         <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
-            <p>© 2026 Facundo Mendez. Built with <span class="text-blue-500">Tailwind</span> & <span
-                    class="text-yellow-500">Coffee</span>.</p>
+            <p><span data-i18n="footer_rights">© 2026 Facundo Mendez. Built with</span> <span
+                    class="text-blue-500">Tailwind</span> & <span class="text-yellow-500"
+                    data-i18n="footer_coffee">Coffee</span>.</p>
             <div class="flex justify-center space-x-6 mt-4">
                 <a href="https://www.linkedin.com/in/facundo-mendez-b316a621b" target="_blank"
                     class="hover:text-white transition-colors">LinkedIn</a>
@@ -618,6 +651,7 @@
     </footer>
 
     <!-- Main Logic -->
+    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
 </body>
 
