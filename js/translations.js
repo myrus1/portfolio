@@ -131,20 +131,45 @@ function setLanguage(lang) {
 
   // Update placeholders if necessary (not currently needed based on content)
 
-  // Update button states
+  // Update button states (Desktop & Mobile)
   const btnEn = document.getElementById('btn-en');
   const btnEs = document.getElementById('btn-es');
+  const btnEnMobile = document.getElementById('btn-en-mobile');
+  const btnEsMobile = document.getElementById('btn-es-mobile');
+
+  // Helper to set active/inactive styles
+  const setActive = (btn) => {
+    if (!btn) return;
+    btn.classList.add('text-white', 'font-bold');
+    btn.classList.remove('text-gray-400', 'font-normal');
+    // Mobile specific (if applicable)
+    if (btn.id.includes('mobile')) {
+      btn.classList.add('bg-slate-800', 'border-slate-600');
+      btn.classList.remove('border-transparent');
+    }
+  };
+
+  const setInactive = (btn) => {
+    if (!btn) return;
+    btn.classList.add('text-gray-400', 'font-normal');
+    btn.classList.remove('text-white', 'font-bold');
+    // Mobile specific
+    if (btn.id.includes('mobile')) {
+      btn.classList.remove('bg-slate-800', 'border-slate-600');
+      btn.classList.add('border-transparent');
+    }
+  };
 
   if (lang === 'en') {
-    btnEn.classList.add('text-white', 'font-bold');
-    btnEn.classList.remove('text-gray-400', 'font-normal');
-    btnEs.classList.add('text-gray-400', 'font-normal');
-    btnEs.classList.remove('text-white', 'font-bold');
+    setActive(btnEn);
+    setInactive(btnEs);
+    setActive(btnEnMobile);
+    setInactive(btnEsMobile);
   } else {
-    btnEs.classList.add('text-white', 'font-bold');
-    btnEs.classList.remove('text-gray-400', 'font-normal');
-    btnEn.classList.add('text-gray-400', 'font-normal');
-    btnEn.classList.remove('text-white', 'font-bold');
+    setActive(btnEs);
+    setInactive(btnEn);
+    setActive(btnEsMobile);
+    setInactive(btnEnMobile);
   }
 
   // Save preference
@@ -158,6 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage(savedLang);
 
   // Event listeners
-  document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
-  document.getElementById('btn-es').addEventListener('click', () => setLanguage('es'));
+  const btnEn = document.getElementById('btn-en');
+  const btnEs = document.getElementById('btn-es');
+  const btnEnMobile = document.getElementById('btn-en-mobile');
+  const btnEsMobile = document.getElementById('btn-es-mobile');
+
+  if (btnEn) btnEn.addEventListener('click', () => setLanguage('en'));
+  if (btnEs) btnEs.addEventListener('click', () => setLanguage('es'));
+  if (btnEnMobile) btnEnMobile.addEventListener('click', () => setLanguage('en'));
+  if (btnEsMobile) btnEsMobile.addEventListener('click', () => setLanguage('es'));
 });
