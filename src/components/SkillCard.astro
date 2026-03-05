@@ -1,0 +1,33 @@
+---
+/**
+ * SkillCard.astro
+ * Individual skill card with icon and name.
+ */
+interface Props {
+  name: string;
+  group: string;
+  icon?: string; // URL to icon image
+  iconText?: string; // Fallback text if no icon URL
+  iconBg?: string; // Background color class for text icon
+}
+
+const { name, group, icon, iconText, iconBg = "bg-gray-700" } = Astro.props;
+---
+
+<div
+  class="skill-item glass-card p-4 rounded-xl text-center hover:bg-slate-800/80 transition-colors"
+  data-group={group}
+>
+  {
+    icon ? (
+      <img src={icon} alt={name} class="mx-auto h-12 w-12 mb-3" />
+    ) : (
+      <div
+        class={`h-12 w-12 mx-auto ${iconBg} rounded-full flex items-center justify-center mb-3 font-bold text-white text-xs`}
+      >
+        {iconText}
+      </div>
+    )
+  }
+  <h4 class="font-medium text-white">{name}</h4>
+</div>

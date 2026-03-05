@@ -1,0 +1,139 @@
+---
+/**
+ * Skills.astro
+ * Skills section with filter buttons and skill cards grid.
+ */
+import SkillCard from "./SkillCard.astro";
+
+const skills = [
+  // DevOps
+  {
+    name: "Docker",
+    group: "devops",
+    icon: "https://img.icons8.com/color/48/000000/docker.png",
+  },
+  {
+    name: "AWS EC2/VPC",
+    group: "devops",
+    icon: "https://img.icons8.com/color/48/000000/amazon-web-services.png",
+  },
+  {
+    name: "GitHub Actions",
+    group: "devops",
+    iconText: "GH",
+    iconBg: "bg-gray-700",
+  },
+  // Scripting
+  {
+    name: "Python",
+    group: "scripting",
+    icon: "https://img.icons8.com/color/48/000000/python--v1.png",
+  },
+  {
+    name: "Bash",
+    group: "scripting",
+    icon: "https://img.icons8.com/color/48/000000/bash.png",
+  },
+  {
+    name: "Git",
+    group: "scripting",
+    icon: "https://img.icons8.com/color/48/000000/git.png",
+  },
+  {
+    name: "SQL",
+    group: "scripting",
+    icon: "https://img.icons8.com/color/48/000000/sql.png",
+  },
+  // Industrial
+  {
+    name: "PLC Logic",
+    group: "industrial",
+    iconText: "PLC",
+    iconBg: "bg-purple-900",
+  },
+  {
+    name: "SCADA Focus",
+    group: "industrial",
+    iconText: "SCADA",
+    iconBg: "bg-purple-900",
+  },
+  // Web
+  {
+    name: "HTML5",
+    group: "web",
+    icon: "https://img.icons8.com/color/48/000000/html-5--v1.png",
+  },
+  {
+    name: "CSS3",
+    group: "web",
+    icon: "https://img.icons8.com/color/48/000000/css3.png",
+  },
+  {
+    name: "JavaScript",
+    group: "web",
+    icon: "https://img.icons8.com/color/48/000000/javascript--v1.png",
+  },
+];
+
+const filterButtons = [
+  { group: "all", i18nKey: "skills_all", label: "All" },
+  { group: "devops", i18nKey: "skills_devops", label: "DevOps & Cloud" },
+  { group: "scripting", i18nKey: "skills_scripting", label: "Scripting" },
+  { group: "industrial", i18nKey: "skills_industrial", label: "Industrial" },
+  { group: "web", i18nKey: "skills_web", label: "Web Dev" },
+];
+---
+
+<section id="habilidades" data-tab-content class="tab-content">
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-white mb-4" data-i18n="skills_title">
+      Technical Arsenal
+    </h2>
+    <div class="flex flex-wrap justify-center gap-4 mt-6">
+      {
+        filterButtons.map((btn, i) => (
+          <button
+            data-skill-group={btn.group}
+            class={`skill-btn px-6 py-2 rounded-full text-sm font-medium ${
+              i === 0
+                ? "active bg-blue-600 text-white"
+                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+            }`}
+            data-i18n={btn.i18nKey}
+          >
+            {btn.label}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    {
+      skills.map((skill) => (
+        <SkillCard
+          name={skill.name}
+          group={skill.group}
+          icon={skill.icon}
+          iconText={skill.iconText}
+          iconBg={skill.iconBg}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Currently Learning -->
+  <div class="mt-12 glass p-6 rounded-xl border-l-4 border-yellow-500">
+    <h4
+      class="text-lg font-semibold text-yellow-500 mb-2"
+      data-i18n="learning_title"
+    >
+      Currently Learning
+    </h4>
+    <div class="flex gap-4 text-gray-400">
+      <span>Terraform</span> • <span>Kubernetes</span> • <span
+        >Advanced CI/CD</span
+      >
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Cloud shape -->
+  <path d="M100 72c0-11-8.5-20-19.2-20.5C79 40.2 69.5 32 58 32c-13.8 0-25 11.2-25 25 0 0.7 0 1.4 0.1 2.1C25.5 61.5 20 68.7 20 77c0 11 9 20 20 20h56c8.8 0 16-7.2 16-16 0-3.5-1.1-6.8-3-9.5" 
+        fill="url(#cloudGrad)" 
+        opacity="0.9"/>
+
+  <!-- Code brackets </> -->
+  <g filter="url(#glow)">
+    <!-- < bracket -->
+    <path d="M42 65L52 55M42 65L52 75" 
+          stroke="url(#codeGrad)" 
+          stroke-width="4.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          fill="none"/>
+    <!-- / slash -->
+    <path d="M60 55L68 75" 
+          stroke="url(#codeGrad)" 
+          stroke-width="4.5" 
+          stroke-linecap="round"
+          fill="none"/>
+    <!-- > bracket -->
+    <path d="M86 65L76 55M86 65L76 75" 
+          stroke="url(#codeGrad)" 
+          stroke-width="4.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          fill="none"/>
+  </g>
+</svg>

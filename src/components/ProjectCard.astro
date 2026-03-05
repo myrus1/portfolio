@@ -1,0 +1,79 @@
+---
+/**
+ * ProjectCard.astro
+ * Individual project card with title, description, tags, and link.
+ */
+interface Props {
+  href: string;
+  title: string;
+  titleI18n: string;
+  description: string;
+  descI18n: string;
+  category: string;
+  categoryColor: string; // e.g. 'blue', 'green', 'purple', 'yellow'
+  tags: string[];
+}
+
+const {
+  href,
+  title,
+  titleI18n,
+  description,
+  descI18n,
+  category,
+  categoryColor,
+  tags,
+} = Astro.props;
+
+const colorMap: Record<string, { badge: string; tag: string; hover: string }> =
+  {
+    blue: {
+      badge: "bg-blue-900 text-blue-200",
+      tag: "text-blue-300",
+      hover: "group-hover:text-blue-400",
+    },
+    green: {
+      badge: "bg-green-900 text-green-200",
+      tag: "text-green-300",
+      hover: "group-hover:text-green-400",
+    },
+    purple: {
+      badge: "bg-purple-900 text-purple-200",
+      tag: "text-purple-300",
+      hover: "group-hover:text-purple-400",
+    },
+    yellow: {
+      badge: "bg-yellow-900 text-yellow-200",
+      tag: "text-yellow-300",
+      hover: "group-hover:text-yellow-400",
+    },
+  };
+
+const colors = colorMap[categoryColor] || colorMap.blue;
+---
+
+<a href={href} target="_blank" class="glass-card p-6 rounded-xl group block">
+  <div class="flex justify-between items-start mb-4">
+    <h3
+      class={`text-xl font-bold text-white ${colors.hover} transition-colors`}
+      data-i18n={titleI18n}
+    >
+      {title}
+    </h3>
+    <span class={`text-xs ${colors.badge} px-2 py-1 rounded`}>{category}</span>
+  </div>
+  <p class="text-gray-400 text-sm mb-6 leading-relaxed" data-i18n={descI18n}>
+    {description}
+  </p>
+  <div class="flex flex-wrap gap-2 mt-auto">
+    {
+      tags.map((tag) => (
+        <span
+          class={`px-2 py-1 bg-slate-800 rounded text-xs ${colors.tag} border border-slate-700`}
+        >
+          {tag}
+        </span>
+      ))
+    }
+  </div>
+</a>

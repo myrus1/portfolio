@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Facundo Mendez | DevOps Engineer & Automation Specialist",
+  description = "Portafolio de Facundo Mendez, DevOps Engineer Junior especializado en automatización, Docker, AWS y sistemas industriales (PLC/SCADA).",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="DevOps, Facundo Mendez, Automatización, Docker, AWS, Portafolio, Programador, SCADA, PLC, Python, Bash"
+    />
+    <meta name="author" content="Facundo Mendez" />
+    <meta name="robots" content="index, follow" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Facundo Mendez | DevOps Engineer" />
+    <meta
+      property="og:description"
+      content="Transformando procesos manuales en sistemas confiables. Explora mis proyectos de automatización y DevOps."
+    />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://facunmendez.dev/" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Facundo Mendez",
+        jobTitle: "DevOps Engineer",
+        url: "https://linkedin.com/in/facundo-mendez-b316a621b",
+        sameAs: [
+          "https://github.com/myrus1",
+          "https://linkedin.com/in/facundo-mendez-b316a621b",
+        ],
+        knowsAbout: [
+          "DevOps",
+          "Automatización Industrial",
+          "Docker",
+          "AWS",
+          "Python",
+          "SCADA",
+        ],
+      })}
+    ></script>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/nube.svg" />
+    <link rel="icon" href="/nube.svg" />
+  </head>
+
+  <body class="bg-dark text-slate-300 min-h-screen flex flex-col">
+    <slot />
+  </body>
+</html>

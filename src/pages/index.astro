@@ -1,0 +1,280 @@
+---
+/**
+ * index.astro
+ * Main portfolio page assembling all components.
+ */
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import Skills from "../components/Skills.astro";
+import Projects from "../components/Projects.astro";
+import Education from "../components/Education.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+	<!-- Navigation -->
+	<Navbar />
+
+	<!-- Main Content -->
+	<main
+		class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
+	>
+		<Hero />
+		<Skills />
+		<Projects />
+		<Education />
+		<Contact />
+	</main>
+
+	<!-- Footer -->
+	<Footer />
+
+	<!-- Client-side Scripts -->
+	<script>
+		import { translations } from "../i18n/translations";
+
+		// ===== Typewriter Effect =====
+		const textElement = document.getElementById("typewriter-text");
+		const texts = ["Estudiante de Sistemas", "Backend & Infra", "DevOps"];
+		let textIndex = 0;
+		let charIndex = 0;
+		let isDeleting = false;
+		let typeSpeed = 100;
+
+		function typeWriter() {
+			const currentText = texts[textIndex];
+
+			if (isDeleting) {
+				textElement!.textContent = currentText.substring(0, charIndex - 1);
+				charIndex--;
+				typeSpeed = 50;
+			} else {
+				textElement!.textContent = currentText.substring(0, charIndex + 1);
+				charIndex++;
+				typeSpeed = 100;
+			}
+
+			if (!isDeleting && charIndex === currentText.length) {
+				isDeleting = true;
+				typeSpeed = 2000;
+			} else if (isDeleting && charIndex === 0) {
+				isDeleting = false;
+				textIndex = (textIndex + 1) % texts.length;
+				typeSpeed = 500;
+			}
+
+			setTimeout(typeWriter, typeSpeed);
+		}
+
+		if (textElement) typeWriter();
+
+		// ===== Mobile Menu =====
+		const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+		const mobileMenu = document.getElementById("mobile-menu");
+		const menuIconClosed = document.getElementById("menu-icon-closed");
+		const menuIconOpen = document.getElementById("menu-icon-open");
+
+		if (mobileMenuBtn && mobileMenu) {
+			mobileMenuBtn.addEventListener("click", () => {
+				const isExpanded =
+					mobileMenuBtn.getAttribute("aria-expanded") === "true";
+				mobileMenuBtn.setAttribute("aria-expanded", String(!isExpanded));
+				mobileMenu.classList.toggle("hidden");
+				menuIconClosed?.classList.toggle("hidden");
+				menuIconOpen?.classList.toggle("hidden");
+			});
+
+			const mobileLinks = mobileMenu.querySelectorAll(".mobile-nav-link");
+			mobileLinks.forEach((link) => {
+				link.addEventListener("click", () => {
+					mobileMenu.classList.add("hidden");
+					mobileMenuBtn.setAttribute("aria-expanded", "false");
+					menuIconClosed?.classList.remove("hidden");
+					menuIconOpen?.classList.add("hidden");
+				});
+			});
+		}
+
+		// ===== Tabs Logic =====
+		const allTabButtons = document.querySelectorAll("[data-tab-target]");
+		const desktopTabButtons = document.querySelectorAll(".nav-link");
+		const tabContents = document.querySelectorAll("[data-tab-content]");
+
+		allTabButtons.forEach((button) => {
+			button.addEventListener("click", () => {
+				const targetSelector = (button as HTMLElement).dataset.tabTarget!;
+				const target = document.querySelector(targetSelector);
+
+				tabContents.forEach((content) => content.classList.remove("active"));
+				if (target) target.classList.add("active");
+
+				desktopTabButtons.forEach((btn) => {
+					btn.classList.remove("active", "text-blue-400");
+					btn.classList.add("text-gray-400");
+
+					if ((btn as HTMLElement).dataset.tabTarget === targetSelector) {
+						btn.classList.add("active", "text-blue-400");
+						btn.classList.remove("text-gray-400");
+					}
+				});
+			});
+		});
+
+		// ===== Inner Tabs (Projects / Experience) =====
+		const innerTabs = document.querySelectorAll("[data-inner-tab-target]");
+		const innerTabContents = document.querySelectorAll(
+			"[data-inner-tab-content]"
+		);
+
+		innerTabs.forEach((tab) => {
+			tab.addEventListener("click", () => {
+				const target = document.querySelector(
+					(tab as HTMLElement).dataset.innerTabTarget!
+				);
+
+				innerTabContents.forEach((tc) => {
+					tc.classList.add("hidden");
+					tc.classList.remove("animate-fade-in");
+				});
+				innerTabs.forEach((t) =>
+					t.classList.remove(
+						"bg-blue-600",
+						"text-white",
+						"shadow-lg",
+						"shadow-blue-500/30"
+					)
+				);
+				innerTabs.forEach((t) =>
+					t.classList.add(
+						"text-gray-400",
+						"hover:text-white",
+						"hover:bg-slate-800"
+					)
+				);
+
+				tab.classList.remove(
+					"text-gray-400",
+					"hover:text-white",
+					"hover:bg-slate-800"
+				);
+				tab.classList.add(
+					"bg-blue-600",
+					"text-white",
+					"shadow-lg",
+					"shadow-blue-500/30"
+				);
+
+				target?.classList.remove("hidden");
+				target?.classList.add("animate-fade-in");
+			});
+		});
+
+		// ===== Skills Filter =====
+		const skillButtons = document.querySelectorAll("[data-skill-group]");
+		const skillItems = document.querySelectorAll(".skill-item");
+
+		skillButtons.forEach((button) => {
+			button.addEventListener("click", () => {
+				const group = (button as HTMLElement).dataset.skillGroup;
+
+				skillButtons.forEach((btn) =>
+					btn.classList.remove("active", "bg-blue-600", "text-white")
+				);
+				skillButtons.forEach((btn) =>
+					btn.classList.add("bg-gray-800", "text-gray-300")
+				);
+
+				button.classList.remove("bg-gray-800", "text-gray-300");
+				button.classList.add("active", "bg-blue-600", "text-white");
+
+				skillItems.forEach((item) => {
+					const itemGroup = (item as HTMLElement).dataset.group;
+					if (group === "all" || itemGroup === group) {
+						(item as HTMLElement).style.display = "block";
+						(item as HTMLElement).style.opacity = "0";
+						setTimeout(() => ((item as HTMLElement).style.opacity = "1"), 50);
+					} else {
+						(item as HTMLElement).style.display = "none";
+					}
+				});
+			});
+		});
+
+		// ===== i18n Language Switcher =====
+		type LangKey = "en" | "es";
+		let currentLang: LangKey = "en";
+
+		function setLanguage(lang: LangKey) {
+			currentLang = lang;
+			document.documentElement.lang = lang;
+
+			document.querySelectorAll("[data-i18n]").forEach((element) => {
+				const key = element.getAttribute("data-i18n")!;
+				const dict = translations[lang] as Record<string, string>;
+				if (dict[key]) {
+					element.textContent = dict[key];
+				}
+			});
+
+			const btnEn = document.getElementById("btn-en");
+			const btnEs = document.getElementById("btn-es");
+			const btnEnMobile = document.getElementById("btn-en-mobile");
+			const btnEsMobile = document.getElementById("btn-es-mobile");
+
+			const setActive = (btn: HTMLElement | null) => {
+				if (!btn) return;
+				btn.classList.add("text-white", "font-bold");
+				btn.classList.remove("text-gray-400", "font-normal");
+				if (btn.id.includes("mobile")) {
+					btn.classList.add("bg-slate-800", "border-slate-600");
+					btn.classList.remove("border-transparent");
+				}
+			};
+
+			const setInactive = (btn: HTMLElement | null) => {
+				if (!btn) return;
+				btn.classList.add("text-gray-400", "font-normal");
+				btn.classList.remove("text-white", "font-bold");
+				if (btn.id.includes("mobile")) {
+					btn.classList.remove("bg-slate-800", "border-slate-600");
+					btn.classList.add("border-transparent");
+				}
+			};
+
+			if (lang === "en") {
+				setActive(btnEn);
+				setInactive(btnEs);
+				setActive(btnEnMobile);
+				setInactive(btnEsMobile);
+			} else {
+				setActive(btnEs);
+				setInactive(btnEn);
+				setActive(btnEsMobile);
+				setInactive(btnEnMobile);
+			}
+
+			localStorage.setItem("preferredLanguage", lang);
+		}
+
+		// Initialize language
+		const savedLang = (localStorage.getItem("preferredLanguage") ||
+			"en") as LangKey;
+		setLanguage(savedLang);
+
+		// Language button listeners
+		document
+			.getElementById("btn-en")
+			?.addEventListener("click", () => setLanguage("en"));
+		document
+			.getElementById("btn-es")
+			?.addEventListener("click", () => setLanguage("es"));
+		document
+			.getElementById("btn-en-mobile")
+			?.addEventListener("click", () => setLanguage("en"));
+		document
+			.getElementById("btn-es-mobile")
+			?.addEventListener("click", () => setLanguage("es"));
+	</script>
+</Layout>

@@ -1,0 +1,138 @@
+---
+/**
+ * Education.astro
+ * Education timeline, certifications, and upcoming courses section.
+ */
+import CertificationCard from "./CertificationCard.astro";
+
+const timeline = [
+  {
+    timeI18n: "edu_time_1",
+    time: "2023 - 2026 (In Progress)",
+    titleI18n: "edu_title_1",
+    title: "Systems Degree",
+    descI18n: "edu_desc_1",
+    desc: "UNNOBA",
+    dotColor: "bg-blue-600",
+    timeColor: "text-blue-400",
+  },
+  {
+    timeI18n: "edu_time_2",
+    time: "2011 - 2017",
+    titleI18n: "edu_title_2",
+    title: "Electromechanical Technician",
+    descI18n: "edu_desc_2",
+    desc: "EEST N°1",
+    dotColor: "bg-gray-600",
+    timeColor: "text-gray-500",
+  },
+];
+
+const certifications = [
+  {
+    name: "Introduction to DevOps and SRE",
+    org: "The Linux Foundation (2025)",
+    status: "Verificado",
+    statusColor: "green",
+  },
+  {
+    name: "Técnicas de Automatización y Control",
+    org: "UTN (2024)",
+    status: "Completado",
+    statusColor: "blue",
+  },
+];
+
+const upcomingCourses = [
+  {
+    name: "AWS Certified Cloud Practitioner",
+    nameI18n: "course_1_name",
+    org: "In preparation",
+    orgI18n: "course_1_desc",
+    status: "In Progress",
+    statusI18n: "course_1_status",
+    statusColor: "yellow",
+  },
+];
+---
+
+<section id="educacion" data-tab-content class="tab-content">
+  <div class="max-w-3xl mx-auto relative">
+    <!-- Timeline Line -->
+    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-700"></div>
+
+    <!-- Timeline Items -->
+    {
+      timeline.map((item) => (
+        <div class="relative pl-20 mb-12 group">
+          <div
+            class={`absolute left-6 top-1 w-5 h-5 ${item.dotColor} rounded-full border-4 border-slate-900 z-10 group-hover:scale-125 transition-transform`}
+          />
+          <div class="glass-card p-6 rounded-xl">
+            <span
+              class={`text-xs font-semibold tracking-wide ${item.timeColor} uppercase`}
+              data-i18n={item.timeI18n}
+            >
+              {item.time}
+            </span>
+            <h3
+              class="text-xl font-bold text-white mt-1"
+              data-i18n={item.titleI18n}
+            >
+              {item.title}
+            </h3>
+            <p class="text-gray-400" data-i18n={item.descI18n}>
+              {item.desc}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+
+    <!-- Certifications -->
+    <div class="ml-20 mt-10">
+      <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+        <svg
+          class="w-6 h-6 text-yellow-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+          >
+          </path>
+        </svg>
+        Certificaciones
+      </h3>
+      <div class="grid gap-4">
+        {certifications.map((cert) => <CertificationCard {...cert} />)}
+      </div>
+    </div>
+
+    <!-- Upcoming Courses -->
+    <div class="ml-20 mt-10">
+      <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+        <svg
+          class="w-6 h-6 text-purple-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+          >
+          </path>
+        </svg>
+        <span data-i18n="courses_title">Upcoming Courses</span>
+      </h3>
+      {upcomingCourses.map((course) => <CertificationCard {...course} />)}
+    </div>
+  </div>
+</section>

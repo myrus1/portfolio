@@ -1,0 +1,47 @@
+---
+interface Props {
+  variant: "desktop" | "mobile";
+}
+
+const { variant } = Astro.props;
+---
+
+{
+  variant === "desktop" ? (
+    <div class="hidden md:flex items-center space-x-2 ml-4 border-l border-slate-700 pl-4">
+      <button
+        id="btn-en"
+        class="text-white font-bold text-sm hover:text-blue-400 transition-colors"
+      >
+        EN
+      </button>
+      <span class="text-slate-600">/</span>
+      <button
+        id="btn-es"
+        class="text-gray-400 font-normal text-sm hover:text-blue-400 transition-colors"
+      >
+        ES
+      </button>
+    </div>
+  ) : (
+    <div class="flex items-center space-x-4 px-3 py-4 border-t border-slate-700 mt-2">
+      <span class="text-gray-500 text-sm uppercase tracking-wider">
+        Language:
+      </span>
+      <div class="flex items-center space-x-2">
+        <button
+          id="btn-en-mobile"
+          class="text-white font-bold text-sm bg-slate-800 px-3 py-1 rounded border border-slate-600"
+        >
+          EN
+        </button>
+        <button
+          id="btn-es-mobile"
+          class="text-gray-400 font-normal text-sm hover:text-white px-3 py-1 rounded border border-transparent"
+        >
+          ES
+        </button>
+      </div>
+    </div>
+  )
+}

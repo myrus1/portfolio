@@ -1,0 +1,51 @@
+---
+/**
+ * CertificationCard.astro
+ * Individual certification or course item.
+ */
+interface Props {
+  name: string;
+  nameI18n?: string;
+  org: string;
+  orgI18n?: string;
+  status: string;
+  statusI18n?: string;
+  statusColor: string; // e.g. 'green', 'blue', 'yellow'
+}
+
+const { name, nameI18n, org, orgI18n, status, statusI18n, statusColor } =
+  Astro.props;
+
+const statusColorMap: Record<string, string> = {
+  green: "text-green-500 border-green-500/30",
+  blue: "text-blue-500 border-blue-500/30",
+  yellow: "text-yellow-500 border-yellow-500/30",
+};
+
+const statusClasses = statusColorMap[statusColor] || statusColorMap.blue;
+---
+
+<div
+  class="glass p-4 rounded-lg flex items-center justify-between hover:bg-slate-800 transition-colors"
+>
+  <div>
+    <h4
+      class="font-semibold text-white"
+      {...(nameI18n ? { 'data-i18n': nameI18n } : {})}
+    >
+      {name}
+    </h4>
+    <p
+      class="text-sm text-gray-500"
+      {...(orgI18n ? { 'data-i18n': orgI18n } : {})}
+    >
+      {org}
+    </p>
+  </div>
+  <span
+    class={`text-sm border px-2 py-1 rounded ${statusClasses}`}
+    {...(statusI18n ? { 'data-i18n': statusI18n } : {})}
+  >
+    {status}
+  </span>
+</div>

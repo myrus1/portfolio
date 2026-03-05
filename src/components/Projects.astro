@@ -1,0 +1,89 @@
+---
+/**
+ * Projects.astro
+ * Projects & Experience section with inner tab switching between projects and work experience.
+ */
+import ProjectCard from "./ProjectCard.astro";
+import Experience from "./Experience.astro";
+
+const projects = [
+  {
+    href: "https://github.com/myrus1/pruebafastapi-app",
+    title: "Containerized REST API",
+    titleI18n: "project_api_title",
+    description:
+      "CI implementation with GitHub Actions and deployment on AWS EC2. Security configuration and full Dockerization.",
+    descI18n: "project_api_desc",
+    category: "DevOps",
+    categoryColor: "blue",
+    tags: ["FastAPI", "Docker", "AWS"],
+  },
+  {
+    href: "https://github.com/myrus1/tech-test-devops",
+    title: "DevOps Ecosystem",
+    titleI18n: "project_ecosystem_title",
+    description:
+      "Environment with 4 orchestrated services (Docker Compose). Setup time reduction from 30min to <5min via scripting.",
+    descI18n: "project_ecosystem_desc",
+    category: "Infra",
+    categoryColor: "green",
+    tags: ["Compose", "Bash", "MySQL"],
+  },
+  {
+    href: "https://github.com/myrus1/industrial-automation-case-study",
+    title: "Industrial Automation",
+    titleI18n: "project_automation_title",
+    description:
+      "Case study: Control logic optimization resulting in 60% reliability improvement of critical processes.",
+    descI18n: "project_automation_desc",
+    category: "IoT/OT",
+    categoryColor: "purple",
+    tags: ["PLC", "SCADA"],
+  },
+  {
+    href: "https://luzverdepergamino.com.ar/",
+    title: "Luz Verde Driving School",
+    titleI18n: "project_luzverde_title",
+    description:
+      "Modern landing page optimized for conversion and SEO. Responsive design and interactive animations.",
+    descI18n: "project_luzverde_desc",
+    category: "Web",
+    categoryColor: "yellow",
+    tags: ["HTML", "CSS", "JavaScript"],
+  },
+];
+---
+
+<section id="experiencia" data-tab-content class="tab-content">
+  <!-- Inner Tabs -->
+  <div class="flex justify-center space-x-4 mb-10">
+    <button
+      data-inner-tab-target="#proyectos"
+      class="inner-tab px-6 py-2 rounded-full font-medium transition-colors bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+      data-i18n="projects_tab">Projects</button
+    >
+    <button
+      data-inner-tab-target="#profesional"
+      class="inner-tab px-6 py-2 rounded-full font-medium transition-colors text-gray-400 hover:text-white hover:bg-slate-800"
+      data-i18n="experience_tab">Work Experience</button
+    >
+  </div>
+
+  <!-- Projects Grid -->
+  <div
+    id="proyectos"
+    data-inner-tab-content
+    class="grid md:grid-cols-2 gap-6 animate-fade-in"
+  >
+    {projects.map((project) => <ProjectCard {...project} />)}
+  </div>
+
+  <!-- Work Experience (Initially Hidden) -->
+  <div
+    id="profesional"
+    data-inner-tab-content
+    class="hidden animate-fade-in space-y-6"
+  >
+    <Experience />
+  </div>
+</section>
